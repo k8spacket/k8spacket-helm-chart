@@ -1,0 +1,10 @@
+apiVersion: v2
+name: k8spacket
+description: A Helm chart for Kubernetes
+
+maintainers:
+  - name: k8spacket
+    email: k8spacket@gmail.com
+type: application
+version: 0.1.0
+appVersion: 0.1.0

@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "k8spacket.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "k8spacket.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "k8spacket.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "k8spacket.selectorLabels" . | nindent 8 }}
+        name: {{ include "k8spacket.name" . }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "k8spacket.serviceAccountName" . }}
+      hostNetwork: true
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+          - name: K8S_PACKET_NAME_LABEL_VALUE
+            value: {{ include "k8spacket.name" . }}
+          - name: K8S_PACKET_HIDE_SRC_PORT
+            value: {{ .Values.k8sPacket.metrics.hideSourcePort | quote}}
+          - name: K8S_PACKET_REVERSE_GEOIP2_DB_PATH
+            value: {{ .Values.k8sPacket.metrics.reverseLookup.geoipDBPath }}
+          - name: K8S_PACKET_REVERSE_WHOIS_REGEXP
+            value: {{ .Values.k8sPacket.metrics.reverseLookup.whoisRegexp }}
+          - name: K8S_PACKET_TCP_ASSEMBLER_MAX_PAGES_PER_CONN
+            value: {{ .Values.k8sPacket.tcp.assembler.maxPagesPerConnection | quote}}
+          - name: K8S_PACKET_TCP_ASSEMBLER_MAX_PAGES_TOTAL
+            value: {{ .Values.k8sPacket.tcp.assembler.maxPagesTotal | quote}}
+          - name: K8S_PACKET_TCP_ASSEMBLER_FLUSHING_PERIOD
+            value: {{ .Values.k8sPacket.tcp.assembler.flushing.periodDuration }}
+          - name: K8S_PACKET_TCP_ASSEMBLER_FLUSHING_CLOSE_OLDER_THAN
+            value: {{ .Values.k8sPacket.tcp.assembler.flushing.closeOlderThanDuration }}
+          - name: K8S_PACKET_TCP_LISTENER_INTERFACES_COMMAND
+            value: {{ .Values.k8sPacket.tcp.listener.interfaces.command }}
+          - name: K8S_PACKET_TCP_LISTENER_INTERFACES_REFRESH_PERIOD
+            value: {{ .Values.k8sPacket.tcp.listener.interfaces.refreshPeriod }}

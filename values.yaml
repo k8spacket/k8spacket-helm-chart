@@ -1,0 +1,58 @@
+replicaCount: 1
+
+image:
+  repository: k8spacket/k8spacket
+  pullPolicy: Always
+  tag: "latest"
+
+imagePullSecrets:
+  - name: k8spacketcred
+
+serviceAccount:
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsUser: 1000
+
+securityContext:
+  allowPrivilegeEscalation: true
+  capabilities:
+    add: [ "NET_ADMIN" ]
+
+service:
+  type: NodePort
+  port: 8080
+  nodePort: 30010
+
+resources:
+  requests:
+    memory: "1000Mi"
+    cpu: "250m"
+  limits:
+    memory: "1500Mi"
+    cpu: "500m"
+
+k8sPacket:
+  metrics:
+    hideSourcePort: true
+    reverseLookup:
+      geoipDBPath: "/home/k8spacket/GeoLite2-City.mmdb"
+      whoisRegexp: "(OrgName:|org-name:)\\s*(.*)"
+  tcp:
+    listener:
+      interfaces:
+        command: "ip address | grep @if | sed -E 's/.* (\\w+)@if.*/\\1/' | tr '\\n' ',' | sed 's/.$//'"
+        refreshPeriod: "10s"
+    assembler:
+      maxPagesPerConnection: 50
+      maxPagesTotal: 50
+      flushing:
+        periodDuration: "10s"
+        closeOlderThanDuration: "20s"
+
+
+
