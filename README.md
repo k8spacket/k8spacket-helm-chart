@@ -9,8 +9,8 @@ Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
 Once Helm is set up properly, add the repo as follows:
 
-```console
-helm repo add k8spacket https://k8spacket.github.io/k8spacket-helm-chart
+```bash
+  helm repo add k8spacket https://k8spacket.github.io/k8spacket-helm-chart
 ```
 
 Cortex can now be installed with the following command:
