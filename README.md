@@ -13,7 +13,7 @@ Once Helm is set up properly, add the repo as follows:
   helm repo add k8spacket https://k8spacket.github.io/k8spacket-helm-chart
 ```
 
-Cortex can now be installed with the following command:
+k8spacket can now be installed with the following command:
 
 ```bash
   helm install k8spacket --namespace k8spacket k8spacket/k8spacket
