@@ -1,0 +1,16 @@
+apiVersion: v1
+entries:
+  k8spacket:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2022-03-20T16:14:54.375976+01:00"
+    description: A Helm chart for k8spacket tool
+    digest: ec6c572d988a612805b1e04373dc108a2ad5594eb3dd4a810995e09517f8060c
+    maintainers:
+    - email: k8spacket@gmail.com
+      name: k8spacket
+    name: k8spacket
+    urls:
+    - k8spacket-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-03-20T16:14:54.375472+01:00"
