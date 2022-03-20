@@ -38,18 +38,26 @@ resources:
 
 k8sPacket:
   metrics:
+    ## Hide source port when 'true' (set to string value 'dynamic' instead of decimal real source port) for Prometheus metrics cardinality reasons
     hideSourcePort: true
     reverseLookup:
+      ## Reverse lookup db file based on GeoLite2 Free Geolocation Data
+      ## See: https://dev.maxmind.com/geoip/geolite2-free-geolocation-data?lang=en
       geoipDBPath: "/home/k8spacket/GeoLite2-City.mmdb"
+      ## Whois result match regexp
       whoisRegexp: "(OrgName:|org-name:)\\s*(.*)"
   tcp:
     listener:
       interfaces:
+        ## Command to achieve containers network interfaces
         command: "ip address | grep @if | sed -E 's/.* (\\w+)@if.*/\\1/' | tr '\\n' ',' | sed 's/.$//'"
+        ## How often refresh the list of network interfaces to listen
         refreshPeriod: "10s"
     assembler:
+      ## See: https://pkg.go.dev/github.com/google/gopacket/tcpassembly#AssemblerOptions
       maxPagesPerConnection: 50
       maxPagesTotal: 50
+      ## Every (periodDuration) seconds, flush connections that haven't seen activity in the past (closeOlderThanDuration) seconds.
       flushing:
         periodDuration: "10s"
         closeOlderThanDuration: "20s"
