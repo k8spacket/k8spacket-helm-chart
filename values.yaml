@@ -45,7 +45,7 @@ k8sPacket:
       ## See: https://dev.maxmind.com/geoip/geolite2-free-geolocation-data?lang=en
       geoipDBPath: "/home/k8spacket/GeoLite2-City.mmdb"
       ## Whois result match regexp
-      whoisRegexp: "(OrgName:|org-name:)\\s*(.*)"
+      whoisRegexp: "(?:OrgName:|org-name:)\\s*(.*)"
   tcp:
     listener:
       interfaces:
