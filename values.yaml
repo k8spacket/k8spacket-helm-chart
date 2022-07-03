@@ -5,9 +5,6 @@ image:
   pullPolicy: Always
   tag: "latest"
 
-imagePullSecrets:
-  - name: k8spacketcred
-
 serviceAccount:
   create: true
   # Annotations to add to the service account
