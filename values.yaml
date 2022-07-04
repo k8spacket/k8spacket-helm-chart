@@ -21,9 +21,9 @@ securityContext:
     add: [ "NET_ADMIN" ]
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 8080
-  nodePort: 30010
+  nodePort:
 
 resources:
   requests:
