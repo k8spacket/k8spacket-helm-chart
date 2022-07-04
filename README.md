@@ -1,4 +1,4 @@
-# k8spacket helm chart
+# [k8spacket](https://github.com/k8spacket) helm chart
 
 The code is provided as-is with no warranties.
 
