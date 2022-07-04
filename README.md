@@ -16,7 +16,7 @@ Once Helm is set up properly, add the repo as follows:
 k8spacket can now be installed with the following command:
 
 ```bash
-  helm install k8spacket --namespace k8spacket k8spacket/k8spacket
+  helm install k8spacket --namespace k8spacket k8spacket/k8spacket --create-namespace
 ```
 
 If you have custom options or values you want to override:
