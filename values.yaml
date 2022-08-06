@@ -3,7 +3,6 @@ replicaCount: 1
 image:
   repository: k8spacket/k8spacket
   pullPolicy: Always
-  tag: "latest"
 
 serviceAccount:
   create: true
