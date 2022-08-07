@@ -46,7 +46,7 @@ k8sPacket:
     listener:
       interfaces:
         ## Command to achieve containers network interfaces
-        command: "ip address | grep @if | sed -E 's/.* (\\w+)@if.*/\\1/' | tr '\\n' ',' | sed 's/.$//'"
+        command: "ip address | grep @ | sed -E 's/.* (\\w+)@.*/\\1/' | tr '\\n' ',' | sed 's/.$//'"
         ## How often refresh the list of network interfaces to listen
         refreshPeriod: "10s"
     assembler:
