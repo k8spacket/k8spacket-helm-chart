@@ -23,6 +23,9 @@ spec:
       hostNetwork: true
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
