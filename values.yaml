@@ -11,6 +11,8 @@ serviceAccount:
 
 podAnnotations: {}
 
+priorityClassName: ""
+
 podSecurityContext:
   runAsUser: 1000
 
