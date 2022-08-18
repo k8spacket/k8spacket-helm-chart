@@ -34,12 +34,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           readinessProbe:
             tcpSocket:
-              port: 8080
+              port: {{ .Values.k8sPacket.tcp.listener.port }}
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             tcpSocket:
-              port: 8080
+              port: {{ .Values.k8sPacket.tcp.listener.port }}
             initialDelaySeconds: 15
             periodSeconds: 20
           resources:
@@ -61,6 +61,8 @@ spec:
             value: {{ .Values.k8sPacket.tcp.assembler.flushing.periodDuration }}
           - name: K8S_PACKET_TCP_ASSEMBLER_FLUSHING_CLOSE_OLDER_THAN
             value: {{ .Values.k8sPacket.tcp.assembler.flushing.closeOlderThanDuration }}
+          - name: K8S_PACKET_TCP_LISTENER_PORT
+            value: {{ .Values.k8sPacket.tcp.listener.port | quote }}
           - name: K8S_PACKET_TCP_LISTENER_INTERFACES_COMMAND
             value: {{ .Values.k8sPacket.tcp.listener.interfaces.command }}
           - name: K8S_PACKET_TCP_LISTENER_INTERFACES_REFRESH_PERIOD

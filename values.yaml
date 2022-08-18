@@ -46,6 +46,7 @@ k8sPacket:
       whoisRegexp: "(?:OrgName:|org-name:)\\s*(.*)"
   tcp:
     listener:
+      port: 6676
       interfaces:
         ## Command to achieve containers network interfaces
         command: "ip address | grep @ | sed -E 's/.* (\\w+)@.*/\\1/' | tr '\\n' ',' | sed 's/.$//'"
@@ -59,6 +60,3 @@ k8sPacket:
       flushing:
         periodDuration: "10s"
         closeOlderThanDuration: "20s"
-
-
-
