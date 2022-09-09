@@ -11,7 +11,7 @@ entries:
       name: k8spacket
     name: k8spacket
     urls:
-    - docs/k8spacket-0.1.2.tgz
+    - k8spacket-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
@@ -23,7 +23,7 @@ entries:
       name: k8spacket
     name: k8spacket
     urls:
-    - docs/k8spacket-0.1.1.tgz
+    - k8spacket-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
@@ -35,6 +35,6 @@ entries:
       name: k8spacket
     name: k8spacket
     urls:
-    - docs/k8spacket-0.1.0.tgz
+    - k8spacket-0.1.0.tgz
     version: 0.1.0
 generated: "2022-09-07T13:36:15.444734+02:00"
