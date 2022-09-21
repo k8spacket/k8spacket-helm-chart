@@ -2,7 +2,7 @@ name: Release Charts
   on:
     push:
       branches:
-        - master
+        - add-helm-auto-releases
   jobs:
     release:
       runs-on: ubuntu-latest
