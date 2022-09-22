@@ -3,7 +3,7 @@ name: Release Charts
 on:
   push:
     branches:
-      - add-helm-auto-releases
+      - master
 
 jobs:
   release:
