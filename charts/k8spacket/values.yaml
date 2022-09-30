@@ -4,7 +4,7 @@ affinity: {}
 
 image:
   repository: docker.io/k8spacket/k8spacket
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 serviceAccount:
   create: true
