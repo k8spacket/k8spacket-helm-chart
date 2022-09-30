@@ -3,7 +3,7 @@ replicaCount: 1
 affinity: {}
 
 image:
-  repository: k8spacket/k8spacket
+  repository: docker.io/k8spacket/k8spacket
   pullPolicy: Always
 
 serviceAccount:
