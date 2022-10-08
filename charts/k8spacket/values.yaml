@@ -1,8 +1,10 @@
 replicaCount: 1
 
+affinity: {}
+
 image:
-  repository: k8spacket/k8spacket
-  pullPolicy: Always
+  repository: docker.io/k8spacket/k8spacket
+  pullPolicy: IfNotPresent
 
 serviceAccount:
   create: true
@@ -11,6 +13,8 @@ serviceAccount:
 
 clusterRole:
   create: true
+
+nodeSelector: {}
 
 podAnnotations: {}
 
@@ -36,6 +40,8 @@ resources:
   limits:
     memory: "1500Mi"
     cpu: "500m"
+
+tolerations: []
 
 k8sPacket:
   metrics:
