@@ -38,6 +38,16 @@ spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
       {{- end }}
+      initContainers:
+        - name: init-k8spacket
+          image: busybox
+          command: [ 'sh', '-c', "cd ./plugins && echo $K8S_PACKET_AVAILABLE_PLUGINS | tr ',' '\n' | xargs wget || true" ]
+          env:
+          - name: K8S_PACKET_AVAILABLE_PLUGINS
+            value: '{{ join "," .Values.k8sPacket.plugins }}'
+          volumeMounts:
+            - mountPath: /plugins
+              name: plugins
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -79,3 +89,9 @@ spec:
             value: {{ .Values.k8sPacket.tcp.listener.interfaces.command }}
           - name: K8S_PACKET_TCP_LISTENER_INTERFACES_REFRESH_PERIOD
             value: {{ .Values.k8sPacket.tcp.listener.interfaces.refreshPeriod }}
+          volumeMounts:
+            - mountPath: /home/k8spacket/plugins
+              name: plugins
+      volumes:
+        - emptyDir: {}
+          name: plugins
