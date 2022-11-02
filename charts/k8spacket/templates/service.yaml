@@ -5,6 +5,11 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "k8spacket.labels" . | nindent 4 }}
+    {{- with .Values.service.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  annotations:
+    {{- toYaml .Values.service.annotations | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
