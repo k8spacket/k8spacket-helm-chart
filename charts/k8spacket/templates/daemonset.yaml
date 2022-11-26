@@ -11,6 +11,10 @@ spec:
       {{- include "k8spacket.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end}}
       labels:
         {{- include "k8spacket.selectorLabels" . | nindent 8 }}
         name: {{ include "k8spacket.name" . }}
