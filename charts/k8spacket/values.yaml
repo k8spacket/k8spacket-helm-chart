@@ -2,6 +2,10 @@ replicaCount: 1
 
 affinity: {}
 
+initContainer:
+  image: busybox
+  pullPolicy: IfNotPresent
+
 image:
   repository: docker.io/k8spacket/k8spacket
   pullPolicy: IfNotPresent
