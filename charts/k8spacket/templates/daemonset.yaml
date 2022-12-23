@@ -44,7 +44,8 @@ spec:
       {{- end }}
       initContainers:
         - name: init-k8spacket
-          image: busybox
+          image: {{ .Values.initContainer.image }}
+          imagePullPolicy: {{ .Values.initContainer.pullPolicy }}
           command: [ 'sh', '-c', "cd ./plugins && echo $K8S_PACKET_AVAILABLE_PLUGINS | tr ',' '\n' | xargs wget || true" ]
           env:
           - name: K8S_PACKET_AVAILABLE_PLUGINS
