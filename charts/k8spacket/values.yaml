@@ -52,8 +52,8 @@ tolerations: []
 k8sPacket:
   ## Available plugin releases. Custom plugins can be provided
   plugins:
-    - https://github.com/k8spacket/plugins/releases/download/v1.0.1/nodegraph-$(arch).so
-    - https://github.com/k8spacket/plugins/releases/download/v1.0.1/tls-parser-$(arch).so
+    - https://github.com/k8spacket/plugins/releases/download/v1.1.0/nodegraph-$(arch).so
+    - https://github.com/k8spacket/plugins/releases/download/v1.1.0/tls-parser-$(arch).so
   metrics:
     ## Hide source port when 'true' (set to string value 'dynamic' instead of decimal real source port) for Prometheus metrics cardinality reasons
     hideSourcePort: true
