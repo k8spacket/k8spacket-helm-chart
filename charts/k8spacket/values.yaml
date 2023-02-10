@@ -3,7 +3,7 @@ replicaCount: 1
 affinity: {}
 
 initContainer:
-  image: busybox
+  image: busybox:stable
   pullPolicy: IfNotPresent
 
 image:
