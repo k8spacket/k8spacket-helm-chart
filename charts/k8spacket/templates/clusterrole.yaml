@@ -9,6 +9,7 @@ rules:
     resources:
     - "pods"
     - "services"
+    - "nodes"
     verbs:
     - "get"
     - "watch"

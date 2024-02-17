@@ -25,12 +25,16 @@ podAnnotations: {}
 priorityClassName: ""
 
 podSecurityContext:
-  runAsUser: 1000
+  runAsUser: 0
 
 securityContext:
   allowPrivilegeEscalation: true
   capabilities:
-    add: [ "NET_ADMIN", "NET_RAW" ]
+    add:
+    - BPF
+    - NET_ADMIN
+    - SYS_ADMIN
+    - SYS_RESOURCE  # requires on kernels < 5.11 to remove memlock (error: failed to set memlock rlimit: operation not permitted)
 
 service:
   type: ClusterIP
@@ -41,19 +45,19 @@ service:
 
 resources:
   requests:
-    memory: "1000Mi"
-    cpu: "250m"
+    memory: "100Mi"
+    cpu: "50m"
   limits:
-    memory: "1500Mi"
-    cpu: "500m"
+    memory: "200Mi"
+    cpu: "300m"
 
 tolerations: []
 
 k8sPacket:
   ## Available plugin releases. Custom plugins can be provided
   plugins:
-    - https://github.com/k8spacket/plugins/releases/download/v1.2.1/nodegraph-$(arch).so
-    - https://github.com/k8spacket/plugins/releases/download/v1.2.1/tls-parser-$(arch).so
+    - https://github.com/k8spacket/plugins/releases/download/v2.0.0/nodegraph-$(arch).so
+    - https://github.com/k8spacket/plugins/releases/download/v2.0.0/tls-parser-$(arch).so
   metrics:
     ## Hide source port when 'true' (set to string value 'dynamic' instead of decimal real source port) for Prometheus metrics cardinality reasons
     hideSourcePort: true
@@ -64,6 +68,9 @@ k8sPacket:
       ## Whois result match regexp
       whoisRegexp: "(?:OrgName:|org-name:)\\s*(.*)"
   tcp:
+    connection:
+      ## When a connection is treated as persistent
+      persistentDuration: 10s
     listener:
       port: 6676
       interfaces:
@@ -71,11 +78,8 @@ k8sPacket:
         command: "ip address | grep @ | sed -E 's/.* (\\w+)@.*/\\1/' | tr '\\n' ',' | sed 's/.$//'"
         ## How often refresh the list of network interfaces to listen
         refreshPeriod: "10s"
-    assembler:
-      ## See: https://pkg.go.dev/github.com/google/gopacket/tcpassembly#AssemblerOptions
-      maxPagesPerConnection: 50
-      maxPagesTotal: 50
-      ## Every (periodDuration) seconds, flush connections that haven't seen activity in the past (closeOlderThanDuration) seconds.
-      flushing:
-        periodDuration: "10s"
-        closeOlderThanDuration: "20s"
+  tls:
+    certificate:
+      cache:
+        ## How long scraped TLS certificates are stored in a cache
+        ttl: "24h"
