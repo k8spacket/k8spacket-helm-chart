@@ -88,3 +88,8 @@ k8sPacket:
     metrics:
       ## Enabled/disabled exposing TLS Prometheus metrics
       enabled: true
+  volumes:
+    ## path to kernel tracing folder on instance
+    ## default to /sys/kernel/tracing
+    ## on AmazonLinux this should be set to /sys/kernel/debug/tracing
+    tracingPath: /sys/kernel/tracing
