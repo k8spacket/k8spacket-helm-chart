@@ -104,4 +104,4 @@ spec:
           emptyDir: {}
         - name: tracing
           hostPath:
-            path: /sys/kernel/tracing
+            path: {{ .Values.k8sPacket.volumes.tracingPath }}
