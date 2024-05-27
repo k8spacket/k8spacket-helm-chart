@@ -55,9 +55,12 @@ tolerations: []
 
 k8sPacket:
   ## Available plugin releases. Custom plugins can be provided
+  api:
+    fieldSelector: status.phase=Running
+    labelSelector: name=k8spacket
   plugins:
-    - https://github.com/k8spacket/plugins/releases/download/v2.0.1/nodegraph-$(arch).so
-    - https://github.com/k8spacket/plugins/releases/download/v2.0.1/tls-parser-$(arch).so
+    - https://github.com/k8spacket/plugins/releases/download/v2.0.2/nodegraph-$(arch).so
+    - https://github.com/k8spacket/plugins/releases/download/v2.0.2/tls-parser-$(arch).so
   reverseLookup:
     ## Reverse lookup db file based on GeoLite2 Free Geolocation Data
     ## See: https://dev.maxmind.com/geoip/geolite2-free-geolocation-data?lang=en
