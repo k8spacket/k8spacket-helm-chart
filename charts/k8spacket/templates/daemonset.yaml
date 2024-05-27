@@ -72,8 +72,10 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-          - name: K8S_PACKET_NAME_LABEL_VALUE
-            value: {{ include "k8spacket.name" . }}
+          - name: K8S_PACKET_API_FIELD_SELECTOR
+            value: {{ .Values.k8sPacket.api.fieldSelector }}
+          - name: K8S_PACKET_API_LABEL_SELECTOR
+            value: {{ .Values.k8sPacket.api.labelSelector }}
           - name: K8S_PACKET_REVERSE_GEOIP2_DB_PATH
             value: {{ .Values.k8sPacket.reverseLookup.geoipDBPath }}
           - name: K8S_PACKET_REVERSE_WHOIS_REGEXP
