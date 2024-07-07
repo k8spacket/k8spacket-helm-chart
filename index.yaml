@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   k8spacket:
   - apiVersion: v2
+    appVersion: 2.0.4
+    created: "2024-07-07T17:13:37.895825605Z"
+    description: A Helm chart for k8spacket tool
+    digest: eb45cb306b6661f08c280b41614ad1d45644dfa5d5e2fa72c698d4468e441b0f
+    maintainers:
+    - email: k8spacket@gmail.com
+      name: k8spacket
+    name: k8spacket
+    urls:
+    - https://github.com/k8spacket/k8spacket-helm-chart/releases/download/k8spacket-2.0.4/k8spacket-2.0.4.tgz
+    version: 2.0.4
+  - apiVersion: v2
     appVersion: 2.0.2
     created: "2024-05-27T17:07:20.714339568Z"
     description: A Helm chart for k8spacket tool
@@ -181,4 +193,4 @@ entries:
     urls:
     - https://github.com/k8spacket/k8spacket-helm-chart/releases/download/k8spacket-0.1.0/k8spacket-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-27T17:07:20.714446128Z"
+generated: "2024-07-07T17:13:37.895941793Z"
