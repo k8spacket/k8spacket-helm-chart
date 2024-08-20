@@ -59,8 +59,8 @@ k8sPacket:
     fieldSelector: status.phase=Running
     labelSelector: name=k8spacket
   plugins:
-    - https://github.com/k8spacket/plugins/releases/download/v2.0.4/nodegraph-$(arch).so
-    - https://github.com/k8spacket/plugins/releases/download/v2.0.4/tls-parser-$(arch).so
+    - https://github.com/k8spacket/plugins/releases/download/v2.0.5/nodegraph-$(arch).so
+    - https://github.com/k8spacket/plugins/releases/download/v2.0.5/tls-parser-$(arch).so
   reverseLookup:
     ## Reverse lookup db file based on GeoLite2 Free Geolocation Data
     ## See: https://dev.maxmind.com/geoip/geolite2-free-geolocation-data?lang=en
