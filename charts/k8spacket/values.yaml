@@ -43,6 +43,11 @@ service:
   labels: {}
   annotations: {}
 
+containerPorts: []
+  # - name: metrics
+  #   containerPort: 6676
+  #   protocol: TCP
+
 resources:
   requests:
     memory: "100Mi"
@@ -78,11 +83,6 @@ k8sPacket:
         command: "ip address | grep @ | sed -E 's/.* (\\w+)@.*/\\1/' | tr '\\n' ',' | sed 's/.$//'"
         ## How often refresh the list of network interfaces to listen
         refreshPeriod: "10s"
-    metrics:
-      ## Enabled/disabled exposing TCP Prometheus metrics
-      enabled: true
-      ## Hide source port when 'true' (set to string value 'dynamic' instead of decimal real source port) for Prometheus metrics cardinality reasons
-      hideSourcePort: true
   tls:
     certificate:
       cache:
