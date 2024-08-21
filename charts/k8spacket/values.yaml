@@ -83,6 +83,34 @@ k8sPacket:
         command: "ip address | grep @ | sed -E 's/.* (\\w+)@.*/\\1/' | tr '\\n' ',' | sed 's/.$//'"
         ## How often refresh the list of network interfaces to listen
         refreshPeriod: "10s"
+    metrics:
+      ## Enabled/disabled exposing TCP Prometheus metrics
+      enabled: true
+      ## Hide source port when 'true' (set to string value 'dynamic' instead of decimal real source port) for Prometheus metrics cardinality reasons
+      hideSourcePort: true
+      ## Prometheus Operator ServiceMonitor configuration
+      serviceMonitor:
+        ## Note: metrics.serviceMonitor.enabled activation depends on containerPorts
+        ##
+        enabled: false
+        ## Specify the namespace for the ServiceMonitor
+        ##
+        namespace: ""
+        ## Define the scrape interval for Prometheus
+        ##
+        interval: ""
+        ## Extra labels for the ServiceMonitor
+        ##
+        labels: {}
+        ## Annotations for the ServiceMonitor
+        ##
+        annotations: {}
+        ## Define the port for Prometheus to scrape metrics
+        ##
+        port: "metrics"
+        ## Path that Prometheus will use to pull metrics from the container
+        ##
+        path: "/metrics"
   tls:
     certificate:
       cache:
