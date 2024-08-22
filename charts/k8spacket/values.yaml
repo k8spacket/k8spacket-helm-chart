@@ -111,6 +111,12 @@ k8sPacket:
         ## Path that Prometheus will use to pull metrics from the container
         ##
         path: "/metrics"
+        ## RelabelConfigs to apply to samples before scraping
+        ##
+        relabelings: []
+        ## MetricRelabelConfigs to apply to samples before ingestion.
+        ##
+        metricRelabelings: []
   tls:
     certificate:
       cache:
