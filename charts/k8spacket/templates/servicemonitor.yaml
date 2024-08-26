@@ -1,0 +1,35 @@
+{{- if and (or .Values.k8sPacket.tcp.metrics.enabled .Values.k8sPacket.tls.metrics.enabled) .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "k8spacket.name" . }}
+  namespace: {{ default .Release.Namespace .Values.serviceMonitor.namespace | quote }}
+  labels:
+    {{- include "k8spacket.labels" . | nindent 4 }}
+  {{- with .Values.serviceMonitor.labels }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.serviceMonitor.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  namespaceSelector:
+    matchNames:
+      - {{ default .Release.Namespace .Values.serviceMonitor.namespace | quote }}
+  selector:
+    matchLabels:
+      {{- include "k8spacket.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - targetPort: {{ default "metrics" .Values.serviceMonitor.port | quote }}
+      interval:  {{ default "30s" .Values.serviceMonitor.interval | quote }}
+      path: {{ default "/metrics" .Values.serviceMonitor.path | quote }}
+      {{- with .Values.serviceMonitor.relabelings }}
+      relabelings:
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- with .Values.serviceMonitor.metricRelabelings }}
+      metricRelabelings:
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
+{{- end }}

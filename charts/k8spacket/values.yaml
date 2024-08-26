@@ -43,6 +43,11 @@ service:
   labels: {}
   annotations: {}
 
+containerPorts: []
+  # - name: metrics
+  #   containerPort: 6676
+  #   protocol: TCP
+
 resources:
   requests:
     memory: "100Mi"
@@ -52,6 +57,36 @@ resources:
     cpu: "300m"
 
 tolerations: []
+
+## Prometheus Operator ServiceMonitor configuration
+serviceMonitor:
+  ## Note: .serviceMonitor.enabled activation depends on containerPorts
+  ##
+  enabled: false
+  ## Specify the namespace for the ServiceMonitor
+  ##
+  namespace: ""
+  ## Define the scrape interval for Prometheus
+  ##
+  interval: ""
+  ## Extra labels for the ServiceMonitor
+  ##
+  labels: {}
+  ## Annotations for the ServiceMonitor
+  ##
+  annotations: {}
+  ## Define the port for Prometheus to scrape metrics
+  ##
+  port: "metrics"
+  ## Path that Prometheus will use to pull metrics from the container
+  ##
+  path: "/metrics"
+  ## RelabelConfigs to apply to samples before scraping
+  ##
+  relabelings: []
+  ## MetricRelabelConfigs to apply to samples before ingestion.
+  ##
+  metricRelabelings: []
 
 k8sPacket:
   ## Available plugin releases. Custom plugins can be provided

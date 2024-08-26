@@ -69,6 +69,10 @@ spec:
               port: {{ .Values.k8sPacket.tcp.listener.port }}
             initialDelaySeconds: 15
             periodSeconds: 20
+          {{- if .Values.containerPorts }}
+          ports:
+            {{- toYaml .Values.containerPorts | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
