@@ -89,6 +89,8 @@ spec:
             value: {{ .Values.k8sPacket.tls.certificate.cache.ttl }}
           - name: K8S_PACKET_TLS_METRICS_ENABLED
             value: {{ .Values.k8sPacket.tls.metrics.enabled | quote }}
+          - name: LOG_LEVEL
+            value: {{ .Values.k8sPacket.logger.level | quote }}
           volumeMounts:
             - mountPath: /sys/kernel/tracing
               name: tracing
