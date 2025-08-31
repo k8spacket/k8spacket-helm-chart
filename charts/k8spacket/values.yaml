@@ -92,6 +92,10 @@ k8sPacket:
   api:
     fieldSelector: status.phase=Running
     labelSelector: name=k8spacket
+  loader:
+    # Possible values: socketfilter, tc. Default: socketfilter
+    # Select an eBPF program type for sniffing TLS traffic
+    source: socketfilter
   reverseLookup:
     ## Reverse lookup db file based on GeoLite2 Free Geolocation Data
     ## See: https://dev.maxmind.com/geoip/geolite2-free-geolocation-data?lang=en
