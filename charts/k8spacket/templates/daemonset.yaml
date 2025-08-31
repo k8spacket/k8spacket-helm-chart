@@ -69,6 +69,8 @@ spec:
             value: {{ .Values.k8sPacket.api.fieldSelector }}
           - name: K8S_PACKET_API_LABEL_SELECTOR
             value: {{ .Values.k8sPacket.api.labelSelector }}
+          - name: K8S_PACKET_LOADER_SOURCE
+            value: {{ .Values.k8sPacket.loader.source }}
           - name: K8S_PACKET_REVERSE_GEOIP2_DB_PATH
             value: {{ .Values.k8sPacket.reverseLookup.geoipDBPath }}
           - name: K8S_PACKET_REVERSE_WHOIS_REGEXP
