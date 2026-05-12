@@ -115,7 +115,7 @@ k8sPacket:
         refreshPeriod: "10s"
     metrics:
       ## Enabled/disabled exposing TCP Prometheus metrics
-      enabled: true
+      enabled: false
       ## Hide source port when 'true' (set to string value 'dynamic' instead of decimal real source port) for Prometheus metrics cardinality reasons
       hideSourcePort: true
   tls:
@@ -124,8 +124,12 @@ k8sPacket:
         ## How long scraped TLS certificates are stored in a cache
         ttl: "24h"
     metrics:
-      ## Enabled/disabled exposing TLS Prometheus metrics
-      enabled: true
+      records:
+        ## Enabled/disabled exposing TLS records metrics
+        enabled: false
+      expiration:
+        ## Enabled/disabled exposing TLS expiration metrics
+        enabled: true
   logger:
     ## Logger level. Available values: DEBUG,INFO,WARN,ERROR
     level: INFO
