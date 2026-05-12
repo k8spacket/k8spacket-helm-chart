@@ -92,7 +92,7 @@ spec:
           - name: K8S_PACKET_TLS_RECORDS_METRICS_ENABLED
             value: {{ .Values.k8sPacket.tls.metrics.records.enabled | quote }}
           - name: K8S_PACKET_TLS_EXPIRATION_METRICS_ENABLED
-            value: { { .Values.k8sPacket.tls.metrics.expiration.enabled | quote } }
+            value: {{ .Values.k8sPacket.tls.metrics.expiration.enabled | quote }}
           - name: LOG_LEVEL
             value: {{ .Values.k8sPacket.logger.level | quote }}
           volumeMounts:
